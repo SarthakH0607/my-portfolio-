@@ -1,0 +1,112 @@
+Created At: 2026-06-10T06:05:00Z
+Completed At: 2026-06-10T06:05:00Z
+File Path: `file:///c:/Users/User/Desktop/Portfolio/src/components/SpacePortfolioBackground.jsx`
+Total Lines: 184
+Total Bytes: 5760
+Showing lines 1 to 184
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: import { memo, useRef, useMemo } from 'react';
+2: import { Canvas, useFrame } from '@react-three/fiber';
+3: import { Points, PointMaterial } from '@react-three/drei';
+4: import * as THREE from 'three';
+5: import { SpiralGalaxy, NebulaClouds, RealisticSun, GlowingStars } from './CosmicBackgroundComponents';
+6: 
+7: 
+8: 
+9: /* ===== Dense Starfield Layer ===== */
+10: function Stars({ count = 12000, color = '#ffffff', size = 0.04, spread = 200, opacity = 0.5, speed = 0.002 }) {
+11:   const ref = useRef();
+12:   const positions = useMemo(() => {
+13:     const p = new Float32Array(count * 3);
+14:     for (let i = 0; i < count; i++) {
+15:       p[i * 3] = (Math.random() - 0.5) * spread;
+16:       p[i * 3 + 1] = (Math.random() - 0.5) * spread;
+17:       p[i * 3 + 2] = (Math.random() - 0.5) * spread;
+18:     }
+19:     return p;
+20:   }, [count, spread]);
+21: 
+22:   useFrame((_, delta) => {
+23:     if (ref.current) ref.current.rotation.y += delta * speed;
+24:   });
+25: 
+26:   return (
+27:     <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
+28:       <PointMaterial transparent color={color} size={size} sizeAttenuation depthWrite={false} opacity={opacity} />
+29:     </Points>
+30:   );
+31: }
+32: 
+33: 
+34: /* ===== Orbiting Planet ===== */
+35: function OrbitPlanet({ size, speed, dist, color, hasRings, tilt = 0 }) {
+36:   const ref = useRef();
+37: 
+38:   useFrame((state) => {
+39:     const t = state.clock.getElapsedTime() * speed * 0.15;
+40:     if (ref.current) {
+41:       ref.current.position.x = Math.cos(t) * dist;
+42:       ref.current.pos
+<truncated 3024 bytes>
+}
+125:         coreColor="#fff"
+126:         armColor="#a7f3d0"
+127:         outerColor="#2563eb"
+128:         size={0.045}
+129:       />
+130: 
+131:       <NebulaClouds 
+132:         count={9} 
+133:         range={75} 
+134:         colors={['#ec4899', '#a855f7', '#6366f1', '#db2777', '#4f46e5']}
+135:       />
+136: 
+137:       {/* Multi-layer starfield for depth with glowing twinkling stars */}
+138:       <Stars count={10000} color="#ffffff" size={0.035} spread={200} opacity={0.5} speed={0.001} />
+139:       <Stars count={5000} color="#ffdca8" size={0.03} spread={250} opacity={0.3} speed={-0.0008} />
+140:       <Stars count={3000} color="#c2d9ff" size={0.025} spread={180} opacity={0.35} speed={0.0005} />
+141:       <GlowingStars />
+142:       
+143:       <RealisticSun size={0.8} />
+144:       
+145:       {planets.map((p, i) => (
+146:         <OrbitPlanet key={i} {...p} />
+147:       ))}
+148: 
+149:       <SlowCamera />
+150:     </>
+151:   );
+152: }
+153: 
+154: /* ===== Exported Component ===== */
+155: function SpacePortfolioBackground() {
+156:   return (
+157:     <div
+158:       className="fixed inset-0 z-0"
+159:       style={{ pointerEvents: 'none' }}
+160:       aria-hidden="true"
+161:     >
+162:       <Canvas
+163:         camera={{ position: [0, 8, 18], fov: 50 }}
+164:         dpr={[1, 1.2]}
+165:         gl={{ antialias: false, powerPreference: 'high-performance', alpha: true }}
+166:         style={{ background: 'transparent' }}
+167:       >
+168:         <SolarSystemScene />
+169:       </Canvas>
+170:       
+171:       {/* Subtle overlay to ensure text readability */}
+172:       <div
+173:         className="absolute inset-0"
+174:         style={{
+175:           background: 'radial-gradient(ellipse at center, rgba(1,1,3,0.3) 0%, rgba(1,1,3,0.6) 60%, rgba(1,1,3,0.75) 100%)',
+176:           pointerEvents: 'none'
+177:         }}
+178:       />
+179:     </div>
+180:   );
+181: }
+182: 
+183: export default memo(SpacePortfolioBackground);
+184: 
+The above content shows the entire, complete file contents of the requested file.

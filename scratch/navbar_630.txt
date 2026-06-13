@@ -1,0 +1,93 @@
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiMenu, FiX } from 'react-icons/fi';
+
+const NAV_ITEMS = [
+  { id: 'central-plaza', label: 'About' },
+  { id: 'skills-tower', label: 'Skills' },
+  { id: 'project-district', label: 'Projects' },
+  { id: 'certificate-museum', label: 'Certificates' },
+  { id: 'github-powerplant', label: 'GitHub' },
+  { id: 'learning-hub', label: 'Learning' },
+  { id: 'vision-tower', label: 'Vision' },
+  { id: 'contact-district', label: 'Contact' },
+];
+
+export default function Navbar({ showNav = true }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 100);
+
+      // Find active section
+      const sections = NAV_ITEMS.map((item) => ({
+        id: item.id,
+        el: document.getElementById(item.id),
+      })).filter((s) => s.el);
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const rect = sections[i].el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight / 3) {
+          setActiveSection(sections[i].id);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const scr
+<truncated 3281 bytes>
+on>
+        </div>
+      </motion.nav>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="fixed inset-0 z-[999] lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div
+              className="absolute inset-0"
+              style={{ background: 'rgba(3, 3, 8, 0.95)', backdropFilter: 'blur(20px)' }}
+              onClick={() => setIsOpen(false)}
+            />
+            <motion.div
+              className="absolute top-20 left-4 right-4 p-5 rounded-2xl glass"
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+            >
+              {NAV_ITEMS.map((item, i) => (
+                <motion.button
+                  key={item.id}
+                  onClick={() => scrollTo(item.id)}
+                  className="interactive w-full text-left px-4 py-3.5 text-xs tracking-[0.15em] uppercase rounded-lg"
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    color: activeSection === item.id ? 'var(--color-accent-light)' : 'rgba(232, 234, 237, 0.65)',
+                    background: activeSection === item.id ? 'rgba(107, 138, 253, 0.06)' : 'transparent',
+                  }}
+                  initial={{ opacity: 0, x: -15 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.04 }}
+                >
+                  {item.label}
+                </motion.button>
+              ))}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

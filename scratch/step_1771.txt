@@ -1,0 +1,102 @@
+Created At: 2026-06-10T06:05:27Z
+Completed At: 2026-06-10T06:05:27Z
+File Path: `file:///c:/Users/User/Desktop/Portfolio/src/components/Navbar.jsx`
+Total Lines: 171
+Total Bytes: 6100
+Showing lines 1 to 171
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: import { useState, useEffect } from 'react';
+2: import { motion, AnimatePresence } from 'framer-motion';
+3: import { FiMenu, FiX } from 'react-icons/fi';
+4: 
+5: const NAV_ITEMS = [
+6:   { id: 'central-plaza', label: 'About' },
+7:   { id: 'skills-tower', label: 'Skills' },
+8:   { id: 'project-district', label: 'Projects' },
+9:   { id: 'certificate-museum', label: 'Certificates' },
+10:   { id: 'github-powerplant', label: 'GitHub' },
+11:   { id: 'learning-hub', label: 'Learning' },
+12:   { id: 'vision-tower', label: 'Vision' },
+13:   { id: 'contact-district', label: 'Contact' },
+14: ];
+15: 
+16: export default function Navbar({ showNav = true }) {
+17:   const [isOpen, setIsOpen] = useState(false);
+18:   const [activeSection, setActiveSection] = useState('');
+19:   const [scrolled, setScrolled] = useState(false);
+20: 
+21:   useEffect(() => {
+22:     const onScroll = () => {
+23:       setScrolled(window.scrollY > 100);
+24: 
+25:       // Find active section
+26:       const sections = NAV_ITEMS.map((item) => ({
+27:         id: item.id,
+28:         el: document.getElementById(item.id),
+29:       })).filter((s) => s.el);
+30: 
+31:       for (let i = sections.length - 1; i >= 0; i--) {
+32:         const rect = sections[i].el.getBoundingClientRect();
+33:         if (rect.top <= window.innerHeight / 3) {
+34:           setActiveSection(sections[i].id);
+35:           break;
+36:         }
+37:       }
+38:     };
+39: 
+40:     window.addEventListener('scroll', onScroll, { passive: true });
+41:     return () => window.removeEventListener('scroll', onScroll);
+42:   }, []);
+43: 
+44:   const scr
+<truncated 3281 bytes>
+on>
+124:         </div>
+125:       </motion.nav>
+126: 
+127:       {/* Mobile menu */}
+128:       <AnimatePresence>
+129:         {isOpen && (
+130:           <motion.div
+131:             className="fixed inset-0 z-[999] lg:hidden"
+132:             initial={{ opacity: 0 }}
+133:             animate={{ opacity: 1 }}
+134:             exit={{ opacity: 0 }}
+135:           >
+136:             <div
+137:               className="absolute inset-0"
+138:               style={{ background: 'rgba(3, 3, 8, 0.95)', backdropFilter: 'blur(20px)' }}
+139:               onClick={() => setIsOpen(false)}
+140:             />
+141:             <motion.div
+142:               className="absolute top-20 left-4 right-4 p-5 rounded-2xl glass"
+143:               initial={{ y: -20, opacity: 0 }}
+144:               animate={{ y: 0, opacity: 1 }}
+145:               exit={{ y: -20, opacity: 0 }}
+146:             >
+147:               {NAV_ITEMS.map((item, i) => (
+148:                 <motion.button
+149:                   key={item.id}
+150:                   onClick={() => scrollTo(item.id)}
+151:                   className="interactive w-full text-left px-4 py-3.5 text-xs tracking-[0.15em] uppercase rounded-lg"
+152:                   style={{
+153:                     fontFamily: 'var(--font-heading)',
+154:                     color: activeSection === item.id ? 'var(--color-accent-light)' : 'rgba(232, 234, 237, 0.65)',
+155:                     background: activeSection === item.id ? 'rgba(107, 138, 253, 0.06)' : 'transparent',
+156:                   }}
+157:                   initial={{ opacity: 0, x: -15 }}
+158:                   animate={{ opacity: 1, x: 0 }}
+159:                   transition={{ delay: i * 0.04 }}
+160:                 >
+161:                   {item.label}
+162:                 </motion.button>
+163:               ))}
+164:             </motion.div>
+165:           </motion.div>
+166:         )}
+167:       </AnimatePresence>
+168:     </>
+169:   );
+170: }
+171: 
+The above content shows the entire, complete file contents of the requested file.

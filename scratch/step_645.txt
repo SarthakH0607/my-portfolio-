@@ -1,0 +1,87 @@
+Created At: 2026-06-08T18:33:43Z
+Completed At: 2026-06-08T18:33:43Z
+File Path: `file:///c:/Users/User/Desktop/Portfolio/src/components/city/SkillsTower.jsx`
+Total Lines: 255
+Total Bytes: 11862
+Showing lines 1 to 255
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: import { useState } from 'react';
+2: import { motion, AnimatePresence } from 'framer-motion';
+3: import { useInView } from '../../hooks/useInView';
+4: import { skills } from '../../data/skills';
+5: import GlassCard from '../ui/GlassCard';
+6: 
+7: export default function SkillsTower() {
+8:   const { ref, hasBeenInView } = useInView({ threshold: 0.1 });
+9:   const [selectedFloor, setSelectedFloor] = useState(null);
+10: 
+11:   const sortedSkills = [...skills].sort((a, b) => a.floor - b.floor);
+12: 
+13:   // Remap colors for a premium aesthetic
+14:   const premiumColorMap = {
+15:     '#3776AB': '#e8c47c', // Python -> gold
+16:     '#ED8B00': '#6b8afd', // Java -> indigo
+17:     '#E34F26': '#e8c47c', // HTML -> gold
+18:     '#1572B6': '#6b8afd', // CSS -> indigo
+19:     '#F7DF1E': '#e8c47c', // JS -> gold
+20:     '#F05032': '#6b8afd', // Git -> indigo
+21:     '#181717': '#e8c47c', // GitHub -> gold
+22:     '#007ACC': '#6b8afd', // VSCode -> indigo
+23:     '#306998': '#e8c47c', // Python -> gold
+24:   };
+25: 
+26:   return (
+27:     <section ref={ref} className="section-container" id="skills-tower">
+28:       <div className="content-wrapper">
+29:         <motion.div
+30:           className="text-center mb-16"
+31:           initial={{ opacity: 0, y: 30 }}
+32:           animate={hasBeenInView ? { opacity: 1, y: 0 } : {}}
+33:           transition={{ duration: 0.8 }}
+34:         >
+35:           <p className="text-xs tracking-[0.4em] uppercase mb-3 text-white/40" style={{ fontFamily: 'var(--font-heading)' }}>
+36:             Skills Tower
+37:           </p>
+38:           <h2
+<truncated 9474 bytes>
+linear-gradient(90deg, ${activeColor}, ${activeColor}88)`,
+217:                               }}
+218:                               initial={{ width: 0 }}
+219:                               animate={{ width: `${skill.level}%` }}
+220:                               transition={{ duration: 0.6 }}
+221:                             />
+222:                           </div>
+223:                           <div className="flex justify-between mt-2 text-[10px]" style={{ fontFamily: 'var(--font-mono)' }}>
+224:                             <span className="text-white/30">Beginner</span>
+225:                             <span style={{ color: activeColor }}>{skill.level}%</span>
+226:                             <span className="text-white/30">Expert</span>
+227:                           </div>
+228:                         </div>
+229:                       </GlassCard>
+230:                     );
+231:                   })()}
+232:                 </motion.div>
+233:               ) : (
+234:                 <motion.div
+235:                   className="glass-card p-10 text-center cursor-none"
+236:                   initial={{ opacity: 0 }}
+237:                   animate={{ opacity: 1 }}
+238:                 >
+239:                   <p className="text-4xl mb-4 filter drop-shadow-[0_0_8px_rgba(255,255,255,0.05)]">🏗️</p>
+240:                   <p className="text-xs tracking-wide uppercase font-semibold text-white/35 mb-1" style={{ fontFamily: 'var(--font-heading)' }}>
+241:                     Overview Panel
+242:                   </p>
+243:                   <p className="text-[11px]" style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-mono)' }}>
+244:                     Click a tower floor to inspect skill metadata
+245:                   </p>
+246:                 </motion.div>
+247:               )}
+248:             </AnimatePresence>
+249:           </div>
+250:         </div>
+251:       </div>
+252:     </section>
+253:   );
+254: }
+255: 
+The above content shows the entire, complete file contents of the requested file.

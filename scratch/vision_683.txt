@@ -1,0 +1,87 @@
+import { motion } from 'framer-motion';
+import { useInView } from '../../hooks/useInView';
+import { timeline } from '../../data/timeline';
+import GlassCard from '../ui/GlassCard';
+
+export default function VisionTower() {
+  const { ref, hasBeenInView } = useInView({ threshold: 0.1 });
+
+  return (
+    <section ref={ref} className="section-container relative overflow-hidden" id="vision-tower">
+      {/* Subtle top background gradient */}
+      <div
+        className="absolute top-0 left-0 right-0 h-40 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(107, 138, 253, 0.03), transparent)',
+        }}
+      />
+
+      <div className="content-wrapper">
+        <motion.div
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 30 }}
+          animate={hasBeenInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+        >
+          <p className="text-xs tracking-[0.4em] uppercase mb-3 text-white/40" style={{ fontFamily: 'var(--font-heading)' }}>
+            Vision Tower
+          </p>
+          <h2 className="section-title">Milestones</h2>
+          <p className="section-subtitle mx-auto">
+            A roadmap reaching forward — each stage representing a milestone on the development path.
+          </p>
+        </motion.div>
+
+        {/* Timeline Grid */}
+        <div className="relative w-full max-w-4xl mx-auto">
+          {/* Central timeline core l
+<truncated 4595 bytes>
+                       <span className="text-[10px]" style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-mono)' }}>
+                          {milestone.status === 'current' ? 'In Progress' : 'Planned'}
+                        </span>
+                      </div>
+                    </GlassCard>
+                  </div>
+
+                  {/* Spacer for the other side */}
+                  <div className="hidden md:block md:w-5/12" />
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Construction crane icon overlay at top */}
+          <motion.div
+            className="absolute -top-10 left-8 md:left-1/2 md:-translate-x-1/2 text-2xl filter drop-shadow-[0_0_10px_rgba(107,138,253,0.3)]"
+            initial={{ opacity: 0, y: 15 }}
+            animate={hasBeenInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.9 }}
+          >
+            🚧
+          </motion.div>
+
+          {/* Extension line at bottom */}
+          <motion.div
+            className="mt-20 text-center"
+            initial={{ opacity: 0 }}
+            animate={hasBeenInView ? { opacity: 1 } : {}}
+            transition={{ delay: 1.1 }}
+          >
+            <div
+              className="w-px h-16 mx-auto mb-4"
+              style={{
+                background: 'linear-gradient(to bottom, rgba(232, 196, 124, 0.2), transparent)',
+              }}
+            />
+            <p
+              className="text-[10px] tracking-[0.25em] uppercase text-white/30"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
+              Further Horizons
+            </p>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}

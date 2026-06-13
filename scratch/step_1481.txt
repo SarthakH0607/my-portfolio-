@@ -1,0 +1,97 @@
+Created At: 2026-06-09T15:04:56Z
+Completed At: 2026-06-09T15:04:56Z
+File Path: `file:///C:/Users/User/.gemini/antigravity-ide/brain/c8196562-832e-4d55-a97f-a872ae362027/scratch/restore-all.cjs`
+Total Lines: 89
+Total Bytes: 2725
+Showing lines 1 to 89
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: const fs = require('fs');
+2: const readline = require('readline');
+3: const path = require('path');
+4: 
+5: const logFile = path.resolve('C:\\Users\\User\\.gemini\\antigravity-ide\\brain\\c8196562-832e-4d55-a97f-a872ae362027\\.system_generated\\logs\\transcript.jsonl');
+6: const rl = readline.createInterface({
+7:   input: fs.createReadStream(logFile),
+8:   crlfDelay: Infinity
+9: });
+10: 
+11: const fileContents = {};
+12: 
+13: rl.on('line', (line) => {
+14:   try {
+15:     const data = JSON.parse(line);
+16:     
+17:     // We only want data from steps before the ruin (let's say step_index < 1290)
+18:     if (data.step_index >= 1290) return;
+19: 
+20:     if (data.status === 'DONE' && data.content) {
+21:       if (data.content.includes('File Path:')) {
+22:         const matches = data.content.match(/File Path: `file:\/\/\/(.*)`/);
+23:         if (matches) {
+24:           const filePath = matches[1];
+25:           const fileName = path.basename(filePath);
+26:           
+27:           // Parse lines
+28:           const lines = data.content.split('\n');
+29:           const codeLines = [];
+30:           let insideCode = false;
+31:           
+32:           for (let i = 0; i < lines.length; i++) {
+33:             const l = lines[i];
+34:             if (l.match(/^\d+:/)) {
+35:               insideCode = true;
+36:               // Strip line number and colon prefix, and the trailing space if any
+37:               const clean = l.replace(/^\d+:\s?/, '');
+38:               codeLines.push(clean);
+39:             }
+40:           }
+41:           
+42:           if (insideCode && codeLines.length > 0) {
+43:             // Keep the latest version seen
+44:             fileContents[fileName] = {
+45:               filePath: filePath,
+46:               content: codeLines.join('\n'),
+47:               step: data.step_index
+48:             };
+49:           }
+50:         }
+51:       }
+52:     }
+53:   } catch (e) {
+54:     // ignore
+55:   }
+56: });
+57: 
+58: rl.on('close', () => {
+59:   console.log('Finished reading logs. Restoring files...');
+60:   
+61:   const targets = [
+62:     'CentralPlaza.jsx',
+63:     'CityOverview.jsx',
+64:     'ContactDistrict.jsx',
+65:     'ControlCenter.jsx',
+66:     'GitHubPowerPlant.jsx',
+67:     'LearningHub.jsx',
+68:     'ProjectDistrict.jsx',
+69:     'SkillsTower.jsx',
+70:     'VisionTower.jsx',
+71:     'DeepSpace.jsx'
+72:   ];
+73:   
+74:   targets.forEach(t => {
+75:     const data = fileContents[t];
+76:     if (data) {
+77:       // Resolve path
+78:       const destPath = path.resolve('C:\\Users\\User\\Desktop\\Portfolio', data.filePath.replace('c:/Users/User/Desktop/Portfolio/', '').replace('C:/Users/User/Desktop/Portfolio/', ''));
+79:       console.log(`Restoring ${t} (from Step ${data.step}) to: ${destPath}`);
+80:       
+81:       // Ensure target directory exists
+82:       fs.mkdirSync(path.dirname(destPath), { recursive: true });
+83:       fs.writeFileSync(destPath, data.content, 'utf8');
+84:     } else {
+85:       console.error(`ERROR: No version found for ${t} in logs!`);
+86:     }
+87:   });
+88: });
+89: 
+The above content shows the entire, complete file contents of the requested file.

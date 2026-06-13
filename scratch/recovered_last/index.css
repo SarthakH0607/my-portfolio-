@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+/* ===== PREMIUM THEME ===== */
+@theme {
+  --color-void: #000000;
+  --color-deep: #060610;
+  --color-surface: #0c0c1d;
+  --color-surface-light: #12122a;
+  --color-accent: #6b8afd;
+  --color-accent-light: #8ba4ff;
+  --color-accent-soft: #4a6ae5;
+  --color-warm: #e8c47c;
+  --color-warm-light: #f0d89a;
+  --color-text: #e8eaed;
+  --color-text-dim: rgba(232, 234, 237, 0.55);
+  --color-text-muted: rgba(232, 234, 237, 0.3);
+  --color-glass: rgba(255, 255, 255, 0.04);
+  --color-glass-border: rgba(255, 255, 255, 0.07);
+  --color-glass-hover: rgba(255, 255, 255, 0.08);
+
+  --font-heading: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
+  --font-body: 'Inter', 'SF Pro Text', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+}
+
+/* ===== BASE ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-void);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  cursor: none;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--color-void);
+  line-height: 1.6;
+}
+
+* { cursor: none !important; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height:
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== SOFT GLOW ===== */
+.soft-glow {
+  box-shadow: 0 0 40px rgba(107, 138, 253, 0.06);
+}
+
+/* ===== FLOAT ===== */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float { animation: float 5s ease-in-out infinite; }
+.float-delay-1 { animation-delay: 0.7s; }
+.float-delay-2 { animation-delay: 1.4s; }
+.float-delay-3 { animation-delay: 2.1s; }
+
+/* ===== FADE IN ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fadeUp 0.8s ease forwards; }
+
+/* ===== SUBTLE GRID & DOTS (over atmosphere) ===== */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(107, 138, 253, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(107, 138, 253, 0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.dots-bg {
+  background-image: radial-gradient(rgba(107, 138, 253, 0.04) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* ===================================================================
+   SPACE PORTFOLIO BACKGROUND — handled by Three.js Canvas
+   =================================================================== */
+
+/* ===== PORTFOLIO WRAPPER — ensures atmosphere shows ===== */
+.portfolio-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  html { cursor: auto; }
+  * { cursor: auto !important; }
+  .section { padding: 80px 16px 48px; }
+}
+
+@media (min-width: 1536px) {
+  html { font-size: 17px; }
+}

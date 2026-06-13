@@ -1,0 +1,91 @@
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiMenu, FiX, FiVolume2, FiVolumeX } from 'react-icons/fi';
+
+const NAV_ITEMS = [
+  { id: 'central-plaza', label: 'About' },
+  { id: 'skills-tower', label: 'Skills' },
+  { id: 'project-district', label: 'Projects' },
+  { id: 'certificate-museum', label: 'Certificates' },
+  { id: 'github-powerplant', label: 'GitHub' },
+  { id: 'learning-hub', label: 'Learning' },
+  { id: 'vision-tower', label: 'Vision' },
+  { id: 'contact-district', label: 'Contact' },
+];
+
+export default function Navbar({ showNav }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 100);
+
+      // Find active section
+      const sections = NAV_ITEMS.map((item) => ({
+        id: item.id,
+        el: document.getElementById(item.id),
+      })).filter((s) => s.el);
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const rect = sections[i].el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight / 3) {
+          setActiveSection(sections[i].id);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="fixed inset-0 z-[999] lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div
+              className="absolute inset-0"
+              style={{ background: 'rgba(5, 5, 16, 0.95)', backdropFilter: 'blur(20px)' }}
+              onClick={() => setIsOpen(false)}
+            />
+            <motion.div
+              className="absolute top-16 left-4 right-4 p-6 rounded-2xl"
+              style={{
+                background: 'rgba(13, 27, 62, 0.6)',
+                border: '1px solid rgba(0, 240, 255, 0.15)',
+              }}
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+            >
+              {NAV_ITEMS.map((item, i) => (
+                <motion.button
+                  key={item.id}
+                  onClick={() => scrollTo(item.id)}
+                  className="interactive w-full text-left px-4 py-3 text-sm tracking-wider uppercase rounded-lg"
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    color: activeSection === item.id ? '#00f0ff' : 'rgba(232, 234, 237, 0.7)',
+                  }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  {item.label}
+                </motion.button>
+              ))}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

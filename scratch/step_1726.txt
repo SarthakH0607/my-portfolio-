@@ -1,0 +1,83 @@
+Created At: 2026-06-10T06:04:29Z
+Completed At: 2026-06-10T06:04:30Z
+File Path: `file:///c:/Users/User/Desktop/Portfolio/src/components/scenes/DeepSpace.jsx`
+Total Lines: 512
+Total Bytes: 21197
+Showing lines 1 to 512
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: import { useRef, useMemo, useEffect, useState } from 'react';
+2: import { Canvas, useFrame } from '@react-three/fiber';
+3: import { Points, PointMaterial } from '@react-three/drei';
+4: import * as THREE from 'three';
+5: import { motion, AnimatePresence } from 'framer-motion';
+6: import { FiCpu, FiCompass, FiGitBranch } from 'react-icons/fi';
+7: import { NebulaClouds, RealisticSun, GlowingStars } from '../CosmicBackgroundComponents';
+8: import { projects } from '../../data/projects';
+9: import { certificates } from '../../data/certificates';
+10: import { useGitHubStats } from '../../hooks/useGitHubStats';
+11: 
+12: /* ===== 18,000 Twinkling Starfields ===== */
+13: function Stars({ count = 8000 }) {
+14:   const ref = useRef();
+15:   const positions = useMemo(() => {
+16:     const p = new Float32Array(count * 3);
+17:     for (let i = 0; i < count; i++) {
+18:       p[i * 3] = (Math.random() - 0.5) * 160;
+19:       p[i * 3 + 1] = (Math.random() - 0.5) * 160;
+20:       p[i * 3 + 2] = (Math.random() - 0.5) * 160;
+21:     }
+22:     return p;
+23:   }, [count]);
+24: 
+25:   useFrame((_, delta) => {
+26:     if (ref.current) ref.current.rotation.y += delta * 0.0015;
+27:   });
+28: 
+29:   return (
+30:     <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
+31:       <PointMaterial transparent color="#ffffff" size={0.05} sizeAttenuation depthWrite={false} opacity={0.65} />
+32:     </Points>
+33:   );
+34: }
+35: 
+36: function WarmStars({ count = 4000 }) {
+37:   const ref = useRef();
+38:   const positions = useMemo(() => {
+39:     const p = new Float32Array(co
+<truncated 20094 bytes>
+     <div className="flex items-start gap-2.5">
+479:                 <FiCpu className="text-[#6b8afd] mt-0.5 shrink-0" size={12} />
+480:                 <div className="flex flex-col">
+481:                   <span className="text-[8px] text-[#e8c47c]/65 uppercase tracking-wider font-bold">LEARNING TELEMETRY</span>
+482:                   <span className="text-white/80 text-[10px] leading-tight">Advanced AI/ML & Web Architectures</span>
+483:                 </div>
+484:               </div>
+485:               <div className="flex items-start gap-2.5">
+486:                 <FiGitBranch className="text-[#6b8afd] mt-0.5 shrink-0" size={12} />
+487:                 <div className="flex flex-col">
+488:                   <span className="text-[8px] text-[#e8c47c]/65 uppercase tracking-wider font-bold">CURRENT MISSION</span>
+489:                   <span className="text-white/80 text-[10px] leading-tight">Online College Voting System & Cinematic Space Port</span>
+490:                 </div>
+491:               </div>
+492:             </div>
+493: 
+494:             {/* Corner accents */}
+495:             <div className="absolute top-3 left-3 w-4 h-4 border-l border-t border-white/10 rounded-tl" />
+496:             <div className="absolute top-3 right-3 w-4 h-4 border-r border-t border-white/10 rounded-tr" />
+497:             <div className="absolute bottom-3 left-3 w-4 h-4 border-l border-b border-white/10 rounded-bl" />
+498:             <div className="absolute bottom-3 right-3 w-4 h-4 border-r border-b border-white/10 rounded-br" />
+499:           </motion.div>
+500:         </div>
+501:       </div>
+502: 
+503:       {/* Subtle light ray from right */}
+504:       <div
+505:         className="absolute top-0 right-0 w-1/2 h-full pointer-events-none z-5"
+506:         style={{
+507:           background: 'radial-gradient(ellipse at 100% 30%, rgba(240, 216, 154, 0.02), transparent 60%)'
+508:         }}
+509:       />
+510:     </section>
+511:   );
+512: }
+The above content shows the entire, complete file contents of the requested file.

@@ -1,0 +1,106 @@
+Created At: 2026-06-10T15:20:44Z
+Completed At: 2026-06-10T15:20:44Z
+File Path: `file:///C:/Users/User/.gemini/antigravity-ide/brain/c8196562-832e-4d55-a97f-a872ae362027/scratch/replay.cjs`
+Total Lines: 149
+Total Bytes: 5211
+Showing lines 1 to 149
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: const fs = require('fs');
+2: const path = require('path');
+3: 
+4: const logFile = 'C:\\Users\\User\\.gemini\\antigravity-ide\\brain\\c8196562-832e-4d55-a97f-a872ae362027\\.system_generated\\logs\\transcript.jsonl';
+5: if (!fs.existsSync(logFile)) {
+6:   console.log("Log file does not exist");
+7:   process.exit(1);
+8: }
+9: 
+10: const lines = fs.readFileSync(logFile, 'utf8').split('\n');
+11: 
+12: const files = {};
+13: 
+14: function cleanValue(val) {
+15:   if (typeof val === 'string') {
+16:     if (val.startsWith('"') && val.endsWith('"')) {
+17:       try {
+18:         return JSON.parse(val);
+19:       } catch (e) {
+20:         // Fallback: manually strip surrounding quotes and replace basic escape sequences
+21:         let inner = val.slice(1, -1);
+22:         try {
+23:           return JSON.parse('"' + inner + '"');
+24:         } catch(err) {
+25:           return inner;
+26:         }
+27:       }
+28:     }
+29:   }
+30:   return val;
+31: }
+32: 
+33: function safeParseJSON(str) {
+34:   let insideString = false;
+35:   let escaped = false;
+36:   let result = '';
+37:   for (let i = 0; i < str.length; i++) {
+38:     const char = str[i];
+39:     if (char === '"' && !escaped) {
+40:       insideString = !insideString;
+41:       result += char;
+42:     } else if (insideString) {
+43:       if (char === '\\') {
+44:         escaped = !escaped;
+45:         result += char;
+46:       } else {
+47:         escaped = false;
+48:         if (char === '\n') {
+49:           result += '\\n';
+50:         } else if (char === '\r') {
+51:           result += '\\
+<truncated 2324 bytes>
+       } catch(e) {
+105:             try {
+106:               chunks = safeParseJSON(chunks);
+107:             } catch(err) {
+108:               console.error(`Error parsing chunks string at Step ${data.step_index}:`, chunks);
+109:               return;
+110:             }
+111:           }
+112:         }
+113:         
+114:         let current = files[normalizedPath] || '';
+115:         let success = true;
+116:         
+117:         chunks.forEach((chunk, i) => {
+118:           const target = cleanValue(chunk.TargetContent || chunk.targetContent || '');
+119:           const replacement = cleanValue(chunk.ReplacementContent || chunk.replacementContent || '');
+120:           if (current.includes(target)) {
+121:             // Replace first occurrence only to match tool behavior exactly
+122:             const index = current.indexOf(target);
+123:             current = current.slice(0, index) + replacement + current.slice(index + target.length);
+124:           } else {
+125:             console.error(`Error: chunk ${i} target content not found in ${path.basename(normalizedPath)} at Step ${data.step_index}`);
+126:             success = false;
+127:           }
+128:         });
+129:         
+130:         if (success) {
+131:           files[normalizedPath] = current;
+132:           console.log(`Step ${data.step_index}: multi_replace_file_content applied on ${path.basename(normalizedPath)}`);
+133:         }
+134:       }
+135:     });
+136:   } catch (e) {
+137:     console.error(`Error parsing line ${index}: ${e.message}`);
+138:   }
+139: });
+140: 
+141: // Write reconstructed files back
+142: Object.keys(files).forEach(filePath => {
+143:   const base = path.basename(filePath);
+144:   if (base === 'DeepSpace.jsx' || base === 'EarthZoom.jsx' || base === 'App.jsx' || base === 'ControlCenter.jsx') {
+145:     fs.writeFileSync(filePath, files[filePath]);
+146:     console.log(`Successfully wrote reconstructed file to ${filePath}`);
+147:   }
+148: });
+149: 
+The above content shows the entire, complete file contents of the requested file.

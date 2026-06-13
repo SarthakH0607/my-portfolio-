@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfolio of Sarthak Hundare — An immersive cinematic portfolio experience showcasing software development and AI engineering journey." />
+    <meta name="keywords" content="Sarthak Hundare, Portfolio, Developer, AI, Python, Software Engineer, Mumbai" />
+    <meta name="author" content="Sarthak Hundare" />
+    <meta property="og:title" content="Portfolio — Sarthak Hundare" />
+    <meta property="og:description" content="From Mumbai to the Future — Building Technology One Project at a Time." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sarthakhundare.syntacsyndicate.co.in" />
+    <meta name="theme-color" content="#030308" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <title>Portfolio — Sarthak Hundare</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Custom Spacecraft Cursor -->
+    <div class="custom-cursor" id="cursor"></div>
+
+    <!-- Intro Landing Screen Overlay -->
+    <div id="intro-screen">
+      <div class="intro-left">
+        <h1 class="intro-title">SARTHAK HUNDARE</h1>
+        <p class="intro-subtitle">SYSTEM ARCHITECT & SOFTWARE DEVELOPER</p>
+        <button class="launch-btn active" id="launch-mission-btn">LAUNCH MISSION</button>
+      </div>
+      <div class="intro-right">
+        <div class="glass-card cyan system-sectors-card">
+          <div class="hologram-scan"></div>
+          <h2 class="sector-panel-title">System Sectors</h2>
+          <div class="planet-selector-list">
+            <div class="planet-item active" data-planet="sun">
+              <span class="planet-color-dot sun-dot"></span>
+              <span class="planet-item-name">Sun</span>
+            </div>
+            <div class="planet-item" data-planet="mercury">
+              <span class="planet-color-dot mercury-dot"></span>
+              <span class="planet-item-name">Mercury</span>
+            </div>
+            <div class="planet-item" data-planet="venus">
+              <span class="planet-color-dot venus-dot"></span>
+              <span class="planet-item-name">Venus</span>
+            </div>
+            <div class="planet-item" data-planet="earth">
+              <span class="planet-color-dot earth-dot"></span>
+              <span class="planet-item-name">Earth</span>
+            </div>
+            <div class="planet-item" data-planet="mars">
+              <span class="planet-color-dot mars-dot"></span>
+              <span class="planet-item-name">Mars</span>
+            </div>
+            <div class="planet-item" data-planet="jupiter">
+              <span class="planet-color-dot jupiter-dot"></span>
+              <span class="planet-item-name">Jupiter</span>
+            </div>
+            <div class="planet-item" data-planet="saturn">
+              <span class="planet-color-dot saturn-dot"></span>
+              <span class="planet-item-name">Saturn</span>
+            </div>
+            <div class="planet-item" data-planet="uranus">
+              <span class="planet-color-dot uranus-dot"></span>
+              <span class="planet-item-name">Uranus</span>
+            </div>
+            <div class="planet-item" data-planet="neptune">
+              <span class="planet-color-dot neptune-dot"></span>
+              <span class="planet-item-name">Neptune</span>
+            </div>
+          </div>
+          <div class="sector-info-display">
+            <div class="sector-info-header">
+              <span id="sector-info-title">SOLAR SECTOR: THE SUN</span>
+            </div>
+            <p id="sector-info-desc">The central power source of Sarthak City, generating nuclear fusion energy to power all districts, hologram networks, and cybergrids.</p>
+            <div id="sector-info-specs">Diameter: 1,392,700 km | Core Temp: 15,000,000°C</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Planet Details Modal Panel -->
+    <div id="planet-details-modal">
+      <div class="glass-card cyan modal-card">
+        <div class="hologram-scan"></div>
+        <div class="modal-header">
+          <h2 id="modal-planet-title" class="modal-title">PLANET NODE</h2>
+          <button id="modal-close-btn" class="modal-close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p id="modal-planet-description" class="modal-desc">Details...</p>
+          <div id="modal-planet-specs" class="modal-specs"></div>
+        </div>
+        <div class="modal-footer">
+          <button id="modal-return-btn" class="btn-cyber" style="padding: 8px 18px; font-size: 0.75rem;">RETURN TO SYSTEM</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3D Space Canvas Wrapper -->
+    <div id="space-canvas-container"></div>
+
+    <!-- Floating Navigation HUD -->
+    <nav class="nav-container" id="navbar">
+      <a href="#central-plaza" class="nav-logo">
+        SARTHAK<span>.DEV</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#central-plaza" class="nav-link active">Central Plaza</a></li>
+        <li><a href="#skills-tower" class="nav-link">Skills Tower</a></li>
+        <li><a href="#project-district" class="nav-link">Projects</a></li>
+        <li><a href="#certificate-museum" class="nav-link">Certificates</a></li>
+        <li><a href="#github-power-plant" class="nav-link">GitHub Stats</a></li>
+        <li><a href="#learning-hub" class="nav-link">Roadmap</a></li>
+        <li><a href="#vision-tower" class="nav-link">Vision</a></li>
+        <li><a href="#contact-district" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Interactive City UI Overlay -->
+    <div id="city-overlay">
+      <!-- CENTRAL PLAZA (About Me) -->
+      <section class="section-container grid-bg" id="central-plaza">
+        <div class="max-w-6xl">
+          <div class="profile-grid">
+            <!-- Left: Avatar -->
+            <div class="avatar-container">
+              <div class="avatar-glow"></div>
+              <img src="/profile.png" alt="Sarthak Hundare" class="avatar-img" />
+            </div>
+            <!-- Right: Intro Bio -->
+            <div class="about-details">
+              <div class="glass-card cyan">
+                <div class="hologram-scan"></div>
+                <h1 class="section-title" style="font-size: 2.8rem; margin-bottom: 15px;">
+                  Sarthak Hundare
+                </h1>
+                <p class="about-bio">
+                  I am a passionate software developer exploring modern web applications, AI/ML models with Python, and interactive digital interfaces. Currently studying in Mumbai, Maharashtra, India.
+                </p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                  <a href="#" class="btn-cyber">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download CV
+                  </a>
+                  <div class="social-links">
+                    <a href="https://github.com/SarthakH0607/" target="_blank" class="social-icon" title="GitHub">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" title="LinkedIn">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <a href="mailto:hundaresarthak@gmail.com" class="social-icon" title="Email">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cards Subgrid -->
+          <div class="cards-subgrid">
+            <div class="glass-card cyan">
+              <div class="info-box-title">
+                <span style="font-size: 1.2rem;">🎯</span>
+                <span>Mission</span>
+              </div>
+              <p style="color: rgba(232, 234, 237, 0.7); font-size: 0.9rem;">
+                From Mumbai to the Future — Building Technology One Project at a Time.
+              </p>
+            </div>
+            <div class="glass-card purple">
+              <div class="info-box-title" style="color: var(--color-purple);">
+                <span style="font-size: 1.2rem;">🚀</span>
+                <span>Current Focus</span>
+              </div>
+              <ul style="list-style: none; font-size: 0.85rem; color: rgba(232, 234, 237, 0.7);" class="space-y-1">
+                <li>• Learning React & Modern Frontend</li>
+                <li>• Exploring AI/ML with Python</li>
+                <li>• Building Real-World Projects</li>
+                <li>• Contributing to Open Source</li>
+              </ul>
+            </div>
+            <div class="glass-card pink">
+              <div class="info-box-title" style="color: var(--color-pink);">
+                <span style="font-size: 1.2rem;">💡</span>
+                <span>Fun Fact</span>
+              </div>
+              <p style="color: rgba(232, 234, 237, 0.7); font-size: 0.9rem;">
+                This portfolio is a futuristic solar system — every section is a planetary sector you can explore!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS TOWER -->
+      <section class="section-container" id="skills-tower">
+        <div class="max-w-6xl">
+          <div class="section-header">
+            <span class="section-tag" style="color: var(--color-purple);">Skills Tower</span>
+            <h2 class="section-title" style="color: var(--color-purple); text-shadow: var(--glow-purple);">
+              Capabilities & Level
+            </h2>
+          </div>
+          <div class="glass-card purple" style="padding: 40px;">
+            <div class="skills-grid">
+              <!-- Python -->
+              <div class="skill-bar-container">
+                <div class="skill-info">
+                  <span class="skill-name">🐍 Python</span>
+                  <span class="skill-percentage">70%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="background: linear-gradient(90deg, #3776AB, var(--color-cyan));" data-level="70%"></div>
+                </div>
+              </div>
+              <!-- Java -->
+              <div class="skill-bar-container">
+                <div class="skill-info">
+                  <span class="skill-name">☕ Java</span>
+                  <span class="skill-percentage">20%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="background: linear-gradient(90deg, #ED8B00, var(--color-purple));" data-level="20%"></div>
+                </div>
+              </div>
+              <!-- JS -->
+              <div class="skill-bar-container">
+                <div class="skill-info">
+                  <span class="skill-name">⚡ JavaScript</span>
+                  <span class="skill-percentage">25%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="background: linear-gradient(90deg, #F7DF1E, var(--color-yellow));" data-level="25%"></div>
+                </div>
+              </div>
+              <!-- HTML -->
+              <div class="skill-bar-container">
+                <div class="skill-info">
+                  <span class="skill-name">🌐 HTML</span>
+                  <span class="skill-percentage">40%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="background: linear-gradient(90deg, #E34F26, var(--color-cyan));" data-level="40%"></div>
+                </div>
+              </div>
+              <!-- CSS -->
+              <div class="skill-bar-container">
+                <div class="skill-info">
+                  <span class="skill-name">🎨 CSS</span>
+                  <span class="skill-percentage">10%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="background: linear-gradient(90deg, #1572B6, var(--color-pink));" data-level="10%"></div>
+                </div>
+              </div>
+              <!-- Git -->
+              <div class="skill-bar-container">
+                <div class="skill-info">
+                  <span class="skill-name">🔀 Git</span>
+                  <span class="skill-percentage">50%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="background: linear-gradient(90deg, #F05032, var(--color-purple));" data-level="50%"></div>
+                </div>
+              </div>
+              <!-- GitHub -->
+              <div class="skill-bar-container">
+                <div class="skill-info">
+                  <span class="skill-name">🐙 GitHub</span>
+                  <span class="skill-percentage">75%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="background: linear-gradient(90deg, #6e40c9, var(--color-pink));" data-level="75%"></div>
+                </div>
+              </div>
+              <!-- AI Fundamentals -->
+              <div class="skill-bar-container">
+                <div class="skill-info">
+                  <span class="skill-name">🤖 AI Fundamentals</span>
+                  <span class="skill-percentage">50%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="background: linear-gradient(90deg, #00f0ff, var(--color-cyan));" data-level="50%"></div>
+                </div>
+              </div>
+              <!-- Data Science -->
+              <div class="skill-bar-container">
+                <div class="skill-info">
+                  <span class="skill-name">📊 Data Science</span>
+                  <span class="skill-percentage">45%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="background: linear-gradient(90deg, #a855f7, var(--color-purple));" data-level="45%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECT DISTRICT -->
+      <section class="section-container grid-bg" id="project-district">
+        <div class="max-w-6xl">
+          <div class="section-header">
+            <span class="section-tag" style="color: var(--color-cyan);">Project District</span>
+            <h2 class="section-title" style="color: var(--color-cyan); text-shadow: var(--glow-cyan);">
+              Operations Log
+            </h2>
+          </div>
+          <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="glass-card cyan project-card">
+              <div class="hologram-scan"></div>
+              <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 5px;">
+                Online College Voting System
+              </h3>
+              <div class="project-tagline">Secure digital democracy for educational institutions</div>
+              <p class="project-description">
+                A full-stack web application enabling secure and transparent college elections. Features real-time vote counting, candidate management, admin dashboard, and result analytics.
+              </p>
+              <div class="tech-list">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">HTML</span>
+                <span class="tech-tag">CSS</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">SQL</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/sarthakhundare/college-voting-system" target="_blank" class="project-link">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                  Source Code
+                </a>
+              </div>
+            </div>
+            <!-- Project 2 -->
+            <div class="glass-card cyan project-card">
+              <div class="hologram-scan"></div>
+              <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 5px;">
+                Sarthak City Portfolio
+              </h3>
+              <div class="project-tagline" style="color: var(--color-purple);">Immersive futuristic portfolio experience</div>
+              <p class="project-description">
+                This very website — a cinematic journey from deep space to a futuristic digital city showcasing my developer journey.
+              </p>
+              <div class="tech-list">
+                <span class="tech-tag">Vite</span>
+                <span class="tech-tag">Three.js</span>
+                <span class="tech-tag">GSAP</span>
+                <span class="tech-tag">Vanilla CSS</span>
+                <span class="tech-tag">JavaScript</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/SarthakH0607/" target="_blank" class="project-link">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                  Source Code
+                </a>
+                <a href="https://sarthakhundare.syntacsyndicate.co.in" target="_blank" class="project-link">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  Live Link
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CERTIFICATE MUSEUM -->
+      <section class="section-container" id="certificate-museum">
+        <div class="max-w-6xl">
+          <div class="section-header">
+            <span class="section-tag" style="color: var(--color-pink);">Museum Exhibit</span>
+            <h2 class="section-title" style="color: var(--color-pink); text-shadow: var(--glow-pink);">
+              Verified Credentials
+            </h2>
+          </div>
+          <div class="certificates-grid" id="certs-container">
+            <!-- Cert 1 -->
+            <div class="cert-card" style="border-color: rgba(66, 133, 244, 0.25);">
+              <div class="cert-top-glow" style="background: linear-gradient(90deg, transparent, #4285F4, transparent);"></div>
+              <div class="cert-header">
+                <div>
+                  <h3 class="cert-name">Google Ambassador</h3>
+                  <span class="cert-issuer" style="color: #4285F4;">Google</span>
+                </div>
+                <span class="cert-date">2026</span>
+              </div>
+              <div class="cert-skills">
+                <span class="cert-skill-tag">Leadership</span>
+                <span class="cert-skill-tag">Advocacy</span>
+                <span class="cert-skill-tag">Tech Community</span>
+                <span class="cert-skill-tag">Public Speaking</span>
+              </div>
+              <a href="https://drive.google.com/drive/folders/1u5UsdCQUlCtKny6_G6pZPMupzlVtlJVX?usp=drive_link" target="_blank" class="cert-verify-link" style="color: #4285F4; text-shadow: 0 0 8px rgba(66, 133, 244, 0.3);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Verify Credentials
+              </a>
+            </div>
+            <!-- Cert 2 -->
+            <div class="cert-card" style="border-color: rgba(248, 0, 0, 0.25);">
+              <div class="cert-top-glow" style="background: linear-gradient(90deg, transparent, #F80000, transparent);"></div>
+              <div class="cert-header">
+                <div>
+                  <h3 class="cert-name">Oracle Certificate</h3>
+                  <span class="cert-issuer" style="color: #F80000;">Oracle</span>
+                </div>
+                <span class="cert-date">2025</span>
+              </div>
+              <div class="cert-skills">
+                <span class="cert-skill-tag">Java</span>
+                <span class="cert-skill-tag">Database</span>
+                <span class="cert-skill-tag">Database Management</span>
+                <span class="cert-skill-tag">SQL</span>
+              </div>
+              <a href="https://drive.google.com/drive/folders/1u5UsdCQUlCtKny6_G6pZPMupzlVtlJVX?usp=drive_link" target="_blank" class="cert-verify-link" style="color: #F80000; text-shadow: 0 0 8px rgba(248, 0, 0, 0.3);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Verify Credentials
+              </a>
+            </div>
+            <!-- Cert 3 -->
+            <div class="cert-card" style="border-color: rgba(0, 240, 255, 0.25);">
+              <div class="cert-top-glow" style="background: linear-gradient(90deg, transparent, #00f0ff, transparent);"></div>
+              <div class="cert-header">
+                <div>
+                  <h3 class="cert-name">Agentic AI Workshop</h3>
+                  <span class="cert-issuer" style="color: #00f0ff;">Google DeepMind</span>
+                </div>
+                <span class="cert-date">2026</span>
+              </div>
+              <div class="cert-skills">
+                <span class="cert-skill-tag">Agentic AI</span>
+                <span class="cert-skill-tag">LLMs</span>
+                <span class="cert-skill-tag">AI Agents</span>
+                <span class="cert-skill-tag">Python</span>
+              </div>
+              <a href="https://drive.google.com/drive/folders/1u5UsdCQUlCtKny6_G6pZPMupzlVtlJVX?usp=drive_link" target="_blank" class="cert-verify-link" style="color: #00f0ff; text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Verify Credentials
+              </a>
+            </div>
+            <!-- Cert 4 -->
+            <div class="cert-card" style="border-color: rgba(236, 72, 153, 0.25);">
+              <div class="cert-top-glow" style="background: linear-gradient(90deg, transparent, #ec4899, transparent);"></div>
+              <div class="cert-header">
+                <div>
+                  <h3 class="cert-name">Web Dev Battle</h3>
+                  <span class="cert-issuer" style="color: #ec4899;">Coding Platform</span>
+                </div>
+                <span class="cert-date">2025</span>
+              </div>
+              <div class="cert-skills">
+                <span class="cert-skill-tag">HTML</span>
+                <span class="cert-skill-tag">CSS</span>
+                <span class="cert-skill-tag">JavaScript</span>
+                <span class="cert-skill-tag">UI Design</span>
+              </div>
+              <a href="https://drive.google.com/drive/folders/1u5UsdCQUlCtKny6_G6pZPMupzlVtlJVX?usp=drive_link" target="_blank" class="cert-verify-link" style="color: #ec4899; text-shadow: 0 0 8px rgba(236, 72, 153, 0.3);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Verify Credentials
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GITHUB POWER PLANT -->
+      <section class="section-container grid-bg" id="github-power-plant">
+        <div class="max-w-6xl">
+          <div class="section-header">
+            <span class="section-tag" style="color: var(--color-purple);">Grid Node</span>
+            <h2 class="section-title" style="color: var(--color-purple); text-shadow: var(--glow-purple);">
+              GitHub Reactor
+            </h2>
+          </div>
+          <div class="glass-card purple">
+            <div class="github-grid">
+              <!-- Stats -->
+              <div>
+                <div class="github-title">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  Reactor Output
+                </div>
+                <div class="stats-grid">
+                  <div class="stat-box">
+                    <div class="stat-val" id="gh-repos">12</div>
+                    <div class="stat-label">Repositories</div>
+                  </div>
+                  <div class="stat-box">
+                    <div class="stat-val" id="gh-stars">28</div>
+                    <div class="stat-label">Total Stars</div>
+                  </div>
+                  <div class="stat-box">
+                    <div class="stat-val" id="gh-followers">18</div>
+                    <div class="stat-label">Followers</div>
+                  </div>
+                  <div class="stat-box">
+                    <div class="stat-val" id="gh-commits">140+</div>
+                    <div class="stat-label">Commits (YTD)</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Graphic Octocat -->
+              <div class="contribution-panel">
+                <svg class="octocat-svg" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                <div style="font-family: var(--font-heading); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; color: #ffffff;">
+                  Connection: SECURE
+                </div>
+                <a href="https://github.com/SarthakH0607/" target="_blank" class="btn-cyber" style="font-size: 0.7rem; padding: 8px 16px;">
+                  Access Reactor
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LEARNING HUB (Roadmap) -->
+      <section class="section-container" id="learning-hub">
+        <div class="max-w-6xl">
+          <div class="section-header">
+            <span class="section-tag" style="color: var(--color-cyan);">Learning Hub</span>
+            <h2 class="section-title" style="color: var(--color-cyan); text-shadow: var(--glow-cyan);">
+              Development Milestones
+            </h2>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+            <div class="glass-card cyan" style="display: flex; gap: 20px; align-items: flex-start;">
+              <span style="font-size: 2rem;">01</span>
+              <div>
+                <h4 style="font-family: var(--font-heading); color: #ffffff; font-size: 1.1rem; margin-bottom: 5px;">
+                  Foundations
+                </h4>
+                <p style="color: rgba(232, 234, 237, 0.7); font-size: 0.9rem;">
+                  Mastering HTML, CSS, core JavaScript, OOP principles in Java, and writing logic scripts in Python.
+                </p>
+              </div>
+            </div>
+            <div class="glass-card cyan" style="display: flex; gap: 20px; align-items: flex-start;">
+              <span style="font-size: 2rem; color: var(--color-purple);">02</span>
+              <div>
+                <h4 style="font-family: var(--font-heading); color: #ffffff; font-size: 1.1rem; margin-bottom: 5px;">
+                  Full-Stack Integration & Version Control
+                </h4>
+                <p style="color: rgba(232, 234, 237, 0.7); font-size: 0.9rem;">
+                  Implementing SQL databases, building server-side applications, and managing version trees using Git and GitHub workflows.
+                </p>
+              </div>
+            </div>
+            <div class="glass-card cyan" style="display: flex; gap: 20px; align-items: flex-start;">
+              <span style="font-size: 2rem; color: var(--color-pink);">03</span>
+              <div>
+                <h4 style="font-family: var(--font-heading); color: #ffffff; font-size: 1.1rem; margin-bottom: 5px;">
+                  Interactive Interfaces & AI
+                </h4>
+                <p style="color: rgba(232, 234, 237, 0.7); font-size: 0.9rem;">
+                  Strengthening frontend capabilities using modern libraries, three-dimensional visuals, and studying artificial intelligence models.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VISION TOWER -->
+      <section class="section-container grid-bg" id="vision-tower">
+        <div class="max-w-6xl">
+          <div class="section-header">
+            <span class="section-tag" style="color: var(--color-pink);">Vision Tower</span>
+            <h2 class="section-title" style="color: var(--color-pink); text-shadow: var(--glow-pink);">
+              Future Flight Path
+            </h2>
+          </div>
+          <div style="border-left: 2px solid rgba(236, 72, 153, 0.2); padding-left: 30px; margin-left: 10px; display: flex; flex-direction: column; gap: 40px;">
+            <!-- Year 2027 -->
+            <div style="position: relative;">
+              <div class="pulse-node" style="position: absolute; left: -41px; top: 8px; width: 20px; height: 20px; border-radius: 50%; background: rgba(236, 72, 153, 0.6); box-shadow: var(--glow-pink);"></div>
+              <div style="position: absolute; left: -36px; top: 13px; width: 10px; height: 10px; border-radius: 50%; background: var(--color-pink);"></div>
+              <div class="glass-card pink">
+                <div style="font-family: var(--font-heading); color: var(--color-pink); font-size: 1.1rem; margin-bottom: 5px; font-weight: 800;">
+                  Year 2027 — Data Science
+                </div>
+                <p style="color: rgba(232, 234, 237, 0.7); font-size: 0.9rem;">
+                  Diving deep into data science pipelines, statistical analysis, predictive modeling, and advanced machine learning structures.
+                </p>
+              </div>
+            </div>
+            <!-- Year 2028 -->
+            <div style="position: relative;">
+              <div class="pulse-node" style="position: absolute; left: -41px; top: 8px; width: 20px; height: 20px; border-radius: 50%; background: rgba(0, 240, 255, 0.6); box-shadow: var(--glow-cyan);"></div>
+              <div style="position: absolute; left: -36px; top: 13px; width: 10px; height: 10px; border-radius: 50%; background: var(--color-cyan);"></div>
+              <div class="glass-card cyan">
+                <div style="font-family: var(--font-heading); color: var(--color-cyan); font-size: 1.1rem; margin-bottom: 5px; font-weight: 800;">
+                  Year 2028 — Graduation
+                </div>
+                <p style="color: rgba(232, 234, 237, 0.7); font-size: 0.9rem;">
+                  Completing university studies, graduating with strong engineering and analytical foundations, and transitioning into full-time data engineering.
+                </p>
+              </div>
+            </div>
+            <!-- Year 2029 -->
+            <div style="position: relative;">
+              <div class="pulse-node" style="position: absolute; left: -41px; top: 8px; width: 20px; height: 20px; border-radius: 50%; background: rgba(168, 85, 247, 0.6); box-shadow: var(--glow-purple);"></div>
+              <div style="position: absolute; left: -36px; top: 13px; width: 10px; height: 10px; border-radius: 50%; background: var(--color-purple);"></div>
+              <div class="glass-card purple">
+                <div style="font-family: var(--font-heading); color: var(--color-purple); font-size: 1.1rem; margin-bottom: 5px; font-weight: 800;">
+                  Year 2029 — Data Scientist
+                </div>
+                <p style="color: rgba(232, 234, 237, 0.7); font-size: 0.9rem;">
+                  Operating as a full-time Data Scientist, building production-grade predictive models, optimizing neural networks, and architecting advanced AI solutions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT DISTRICT -->
+      <section class="section-container" id="contact-district">
+        <div class="max-w-6xl">
+          <div class="section-header">
+            <span class="section-tag" style="color: var(--color-cyan);">Terminal Node</span>
+            <h2 class="section-title" style="color: var(--color-cyan); text-shadow: var(--glow-cyan);">
+              Establish Comm-Link
+            </h2>
+          </div>
+          <div class="glass-card cyan contact-terminal">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <div class="terminal-title">CONTACT_CONSOLE_LINK</div>
+              <div></div>
+            </div>
+            <div class="terminal-body" id="contact-console">
+              <div class="terminal-line terminal-accent">visitor@sarthak.dev:~$ initialize-gateway --secure</div>
+              <div class="terminal-line terminal-success">Establishing secure remote shell connection... SUCCESS</div>
+              <div class="terminal-line">Welcome to the Connection Portal. Select a node to establish a direct link:</div>
+              <br/>
+              <div class="cyber-links-container">
+                <!-- Email Protocol -->
+                <a href="mailto:hundaresarthak@gmail.com" class="cyber-link-card mail-node">
+                  <div class="cyber-card-glow"></div>
+                  <div class="cyber-card-header">
+                    <span class="protocol-status">ONLINE</span>
+                    <span class="protocol-title">EMAIL PROTOCOL</span>
+                  </div>
+                  <div class="cyber-card-body">
+                    <svg class="cyber-card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <div class="cyber-card-info">
+                      <span class="cyber-card-value">hundaresarthak@gmail.com</span>
+                      <span class="cyber-card-desc">Click to transmit direct email message</span>
+                    </div>
+                  </div>
+                </a>
+
+                <!-- LinkedIn Gateway -->
+                <a href="https://www.linkedin.com/in/sarthak-hundare-0607" target="_blank" rel="noopener noreferrer" class="cyber-link-card linkedin-node">
+                  <div class="cyber-card-glow"></div>
+                  <div class="cyber-card-header">
+                    <span class="protocol-status">ONLINE</span>
+                    <span class="protocol-title">LINKEDIN GATEWAY</span>
+                  </div>
+                  <div class="cyber-card-body">
+                    <svg class="cyber-card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    <div class="cyber-card-info">
+                      <span class="cyber-card-value">linkedin.com/in/sarthak-hundare</span>
+                      <span class="cyber-card-desc">Click to direct message on LinkedIn</span>
+                    </div>
+                  </div>
+                </a>
+
+                <!-- GitHub Reactor -->
+                <a href="https://github.com/SarthakH0607" target="_blank" rel="noopener noreferrer" class="cyber-link-card github-node">
+                  <div class="cyber-card-glow"></div>
+                  <div class="cyber-card-header">
+                    <span class="protocol-status">ONLINE</span>
+                    <span class="protocol-title">GITHUB REACTOR</span>
+                  </div>
+                  <div class="cyber-card-body">
+                    <svg class="cyber-card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    <div class="cyber-card-info">
+                      <span class="cyber-card-value">github.com/SarthakH0607</span>
+                      <span class="cyber-card-desc">Click to view source code repositories</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Script imports: Three.js and GSAP via CDNs to support standalone running -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
