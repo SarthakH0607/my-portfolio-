@@ -53,7 +53,7 @@ export const projects = [
       'Performance optimization for complex UIs',
     ],
     github: 'https://github.com/sarthakhundare/portfolio',
-    live: 'https://sarthakhundare.syntacsyndicate.co.in',
+    live: 'https://sarthakhundare.syntaxsyndicate.co.in',
     featured: false,
     status: 'completed',
     year: 2026,

@@ -81,7 +81,7 @@ export default function CityArrival({ onComplete }) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
           >
-            Powered by sarthakhundare.syntacsyndicate.co.in
+            Powered by sarthakhundare.syntaxsyndicate.co.in
           </motion.p>
         </motion.div>
       )}

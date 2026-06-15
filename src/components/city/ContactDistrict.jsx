@@ -106,7 +106,7 @@ export default function ContactDistrict() {
             Designed & Built by Sarthak Hundare
           </p>
           <p className="text-xs text-white/20 font-mono">
-            © {new Date().getFullYear()} Sarthak.dev • sarthakhundare.syntacsyndicate.co.in
+            © {new Date().getFullYear()} Sarthak.dev • sarthakhundare.syntaxsyndicate.co.in
           </p>
         </motion.div>
       </div>
