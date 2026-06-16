@@ -1,5 +1,5 @@
 // ==========================================
-// 1. Custom Spacecraft Cursor
+// 1. Custom Spacecraft Cursor (GitHub Actions Active)
 // ==========================================
 const cursor = document.getElementById('cursor');
 
